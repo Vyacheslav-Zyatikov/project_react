@@ -1,15 +1,64 @@
 .App {
   text-align: center;
+  &-header {
+    background-color: #90abd3;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+  }
 }
 
-.App-header {
-  background-color: #5e99ef;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: #a1ff00;
+.quote{
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-rows: 60px;
+  color: #e82121;
+  p{
+    display: grid;
+    padding: 0 7px;
+    margin: 15px 0;
+  }
+  .author{
+    color: #164da1;
+  }
+  .text{
+    color: #ef2323;
+  }
+
 }
 
+.form{
+  display: grid;
+  grid-template-rows: auto auto auto;
+  grid-template-columns: auto;
+  grid-row-gap: 10px;
+  align-self: center;
+  justify-self: center;
+  border: blue 2px solid;
+  padding: 25px;
+  border-radius: 8px;
+  input{
+    display: grid;
+    height: 7vh;
+    width: 45vw;
+    border: none;
+    border-radius: 10px;
+    font-size: 1em;
+    padding: 0 10px;
+  }
+  button{
+    display: grid;
+    height: 4vh;
+    width: 35vw;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.8em;
+    justify-self: center;
+    &:hover{
+      outline: #ef2323 1px solid;
+    }
+  }
+}
