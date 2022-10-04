@@ -1,13 +1,15 @@
 .App {
   display: grid;
-  grid-template-columns: 150px 1fr 150px;
+  grid-template-columns: 1fr;
   grid-template-rows: 50px 1fr 50px;
   gap: 5px 5px;
   grid-template-areas:
-    "h h h"
-    "ls mc mc"
-    "f f f";
+    "h"
+    "mc"
+    "f";
   text-align: center;
+  justify-items: center;
+  justify-self: center;
   min-height: 100vh;
   background-color: #90abd3;
   &-header {
@@ -15,18 +17,26 @@
     grid-area: h;
     justify-content: center;
     font-size: calc(10px + 2vmin);
+    width: 100vw;
   }
   &-footer{
     display: grid;
     grid-area: f;
+    width: 100vw;
   }
   &-leftSidebar{
     display: grid;
-    grid-area: ls;
   }
   &-mainContent{
     display: grid;
-    grid-area: mc;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    width: 100%;
+  }
+  &-chats{
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+    grid-template-rows: 1fr;
   }
 }
 
@@ -34,7 +44,7 @@
   display: grid;
   grid-template-columns: auto auto;
   grid-auto-rows: min-content;
-  color: #e82121;
+  background-color: unset !important;
   p{
     display: inline-grid;
     padding: 0 7px;
@@ -79,5 +89,32 @@
     &:hover{
       outline: #ef2323 1px solid;
     }
+  }
+}
+.css-bhp9pd-MuiPaper-root-MuiCard-root{
+  background-color: unset !important;
+}
+.activeClass {
+  color: #ef2323;
+}
+.chatLink{
+  display: grid;
+  grid-template-columns: 85% 15%;
+  button{
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+  }
+}
+.headerMenu{
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: min-content min-content min-content;
+  grid-auto-columns: min-content;
+  a{
+    display: grid;
+    padding: 5px;
+    margin: 5px;
   }
 }
