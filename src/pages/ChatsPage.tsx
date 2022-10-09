@@ -1,67 +1,50 @@
-import React, {useEffect, useState} from 'react';
-import {Box, Button, TextField} from "@mui/material";
-import Message from "../components/Message";
-import LogicComponent from "../components/LogicComponent";
+import React, { useState } from 'react';
+import {Link} from "react-router-dom";
 
 const ChatsPage = () => {
-    const [messageList, setMessageList] = useState<any>([]);
-    const [text, setText] = useState<string>('');
-    const [author, setAuthor] = useState<string>('');
+    const [chatsList, setChatsList] = useState<any>([
+        {id: 1, name: 'Балаболка'},
+        {id: 2, name: 'Первачёк'},
+        {id: 3, name: 'Колхозник'},
+        {id: 4, name: 'Первый на деревне'}
+    ]);
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault();
-        setMessageList((prevState: any[]) => [...prevState, {
-            id: giveLastId(prevState),
-            text: text,
-            author: author
-        }])
+    const [name, setName] = useState('');
+
+    const chatDelete = (id: any) => {
+        const filtered = chatsList.filter((chat: any) => chat.id !== id);
+        setChatsList(filtered);
     }
 
-    function giveLastId(array: any[]) {
-        return array.length ? array[array.length - 1].id + 1 : 0;
-    }
-
-// eslint-disable-next-line react-hooks/exhaustive-deps
-    function botAnswer(): void {
-        const lastAuthor = messageList[messageList.length - 1];
-        if (lastAuthor && lastAuthor.author) {
-            setMessageList((prevState: any[]) => [
-                    ...prevState, {
-                        id: giveLastId(prevState),
-                        text: `Сообщение автора ${lastAuthor.author} отправлено`
-                    }
-                ]
-            )
-            setText('')
-            setAuthor('')
+    const chatAdd = () => {
+        const objLength:number = chatsList.length+1;
+        const obj = {
+            id: objLength,
+            name: name
         }
+        setChatsList((prevState:any) => [...prevState, obj]);
     }
-
-    useEffect(() => {
-        setTimeout(() => {
-            botAnswer();
-        }, 1500)
-    }, [botAnswer, messageList])
     return (
         <>
             <div className="App-chats">
                 <div className="App-leftSidebar">
-                    <LogicComponent/>
-                </div>
-                <div className="App-mainContent">
-                    <Box component="form" className="form" onSubmit={handleSubmit}>
-                        <TextField className="form-input" autoFocus={true} value={text}
-                                   onChange={(e) => setText(e.target.value)} placeholder={"Введите сообщение"}
-                                   variant="outlined"/>
-                        <TextField className="form-input" value={author} onChange={(e) => setAuthor(e.target.value)}
-                                   placeholder={"Кто вы?"} variant="outlined"/>
-                        <Button className="form-button" type='submit' variant="outlined">Добавить сообщение</Button>
-                    </Box>
-                    {messageList.map((message: { id: number; text: string; author: string; }) => {
+                    {chatsList.map((chat: { id: number; name: string; }) => {
                         return (
-                            <Message key={message.id} text={message.text} author={message.author}/>
+                            <div className={'chatLink'} key={chat.id}>
+                                <Link to={`/chats/${chat.id}`}>
+                                    {chat.name}
+                                </Link>
+                                <button onClick={() => chatDelete(chat.id)}>X</button>
+                            </div>
                         )
                     })}
+                </div>
+                <div className="App-chatsContent">
+                    <h3 className="App-chatsContent-h3">Вы можете выбрать понравившийся чат или создать свой.</h3>
+                    <div className="App-chatsContent-form">
+                        <input value={name} onChange={(e) => setName(e.target.value)}/>
+                        <button onClick={chatAdd}>Добавить чат</button>
+                    </div>
                 </div>
             </div>
         </>

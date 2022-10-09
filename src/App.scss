@@ -1,3 +1,15 @@
+:root[data-theme="light"] {
+  --background-color: #90abd3;
+}
+
+:root[data-theme="dark"] {
+  --background-color: #4b6e71;
+}
+
+body {
+  background: var(--background-color);
+}
+
 .App {
   display: grid;
   grid-template-columns: 1fr;
@@ -11,13 +23,19 @@
   justify-items: center;
   justify-self: center;
   min-height: 100vh;
-  background-color: #90abd3;
+  background-color: var(--background-color);
   &-header {
     display: grid;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 100px 100px;
     grid-area: h;
     justify-content: center;
     font-size: calc(10px + 2vmin);
     width: 100vw;
+    position: relative;
+    &-p{
+      font-size: small;
+    }
   }
   &-footer{
     display: grid;
